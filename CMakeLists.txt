@@ -11,7 +11,6 @@ find_package(catkin REQUIRED COMPONENTS
 )
 catkin_package(
   INCLUDE_DIRS
-  include
   LIBRARIES autonomous_ship
   CATKIN_DEPENDS message_generation roscpp rospy std_msgs
   )
