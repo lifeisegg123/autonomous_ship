@@ -19,8 +19,8 @@ def callback(image_msg):
     cv2.waitKey(1)
 
 
-if __name__ == '__main__':
-    rospy.init_node('gray')
+def handleCamera():
+    rospy.init_node('handleCamera')
     sub = rospy.Subscriber(
         '/image_raw', Image, callback, queue_size=1)
 
