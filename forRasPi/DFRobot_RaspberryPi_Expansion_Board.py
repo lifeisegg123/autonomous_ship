@@ -1,6 +1,24 @@
+# -*- coding:utf-8 -*-
+
+'''
+ MIT License
+ Copyright (C) <2019> <@DFRobot Frank>
+　Permission is hereby granted, free of charge, to any person obtaining a copy of this
+　software and associated documentation files (the "Software"), to deal in the Software
+　without restriction, including without limitation the rights to use, copy, modify,
+　merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+　permit persons to whom the Software is furnished to do so.
+　The above copyright notice and this permission notice shall be included in ALL copies or
+　substantial portions of the Software.
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+ FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+'''
+
 import time
-def map_s(x, in_min = 0, in_max = 180, out_min = 592, out_max = 2448):
-  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+
 _PWM_CHAN_COUNT = 4
 _ADC_CHAN_COUNT = 4
 
@@ -245,12 +263,12 @@ class DFRobot_Expansion_Board_Servo():
     '''
     self._board = board
 
-  def begin(self):
+  def begin(self, frequency = 91):
     '''
       @brief    Board servo begin
     '''
     self._board.set_pwm_enable()
-    self._board.set_pwm_frequency(50)
+    self._board.set_pwm_frequency(frequency)
     self._board.set_pwm_duty(self._board.ALL, 0)
 
   def move(self, id, angle):
@@ -260,7 +278,13 @@ class DFRobot_Expansion_Board_Servo():
       @param angle: int   Angle to move, in range 0 to 180
     '''
     if 0 <= angle <= 180:
-      self._board.set_pwm_duty(id, (map_s(angle)) / 200)
+      self._board.set_pwm_duty(id, (0.5 + (float(angle) / 90.0)) / 20 * 100)
+  
+  def bldcMove(self, id, direction):
+    
+      self._board.set_pwm_duty(id,
+
+
 import smbus
 
 class DFRobot_Expansion_Board_IIC(DFRobot_Expansion_Board):
