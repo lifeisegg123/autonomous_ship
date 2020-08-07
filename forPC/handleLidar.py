@@ -1,6 +1,5 @@
 import rospy
-import math
-import time
+
 from sensor_msgs.msg import LaserScan
 
 

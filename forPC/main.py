@@ -1,5 +1,7 @@
 from handleCamera import handleCamera
 from handleLidar import Lidar
+from handleImu import Imu
+
 import rospy
 
 from std_msgs.msg import Int32
@@ -7,17 +9,19 @@ from std_msgs.msg import Int32
 
 class Ship:
     lidar = Lidar()
+    imu = Imu()
     motorPub = rospy.Publisher('motor', Int32, queue_size=10)
 
-    def subscribeLidar(self):
+    def runSubscribes(self):
         self.lidar.handleLidar()
+        self.imu.handleImu()
 
     def publishMotor(self):
         self.pub.publish()
 
     def init(self):
         rospy.init_node('Ship', anonymous=True)
-        self.subscribeLidar()
+        self.runSubscribes()
         while not rospy.is_shutdown():
             # print(self.lidar.lidarDatas)
             publishMotor()
