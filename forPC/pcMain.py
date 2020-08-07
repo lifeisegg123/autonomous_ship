@@ -1,30 +1,33 @@
-from handleCamera import handleCamera
+#!/usr/bin/env python
 from handleLidar import Lidar
 from handleImu import Imu
 
 import rospy
 
-from std_msgs.msg import Int32
+from autonomous_ship.msg import motorValue
 
 
 class Ship:
+    gpsCoordination = [[100, 10], [500, 300], [600, 100]]
+
+    motorPub = rospy.Publisher('motor', motorValue, queue_size=10)
+
     lidar = Lidar()
     imu = Imu()
-    motorPub = rospy.Publisher('motor', Int32, queue_size=10)
 
     def runSubscribes(self):
         self.lidar.handleLidar()
         self.imu.handleImu()
 
     def publishMotor(self):
-        self.pub.publish()
+        self.motorPub.publish()
 
     def init(self):
         rospy.init_node('Ship', anonymous=True)
         self.runSubscribes()
         while not rospy.is_shutdown():
             # print(self.lidar.lidarDatas)
-            publishMotor()
+            self.publishMotor()
             rospy.sleep(1)
 
 

@@ -43,7 +43,7 @@ def get_x_rotation(x, y, z):
 
 
 if __name__ == "__main__":
-    rospy.init_node("publishIMU")
+    rospy.init_node("imuPublish")
     pub = rospy.Publisher("Imu", imu, queue_size=10)
 
     bus = smbus.SMBus(1)
