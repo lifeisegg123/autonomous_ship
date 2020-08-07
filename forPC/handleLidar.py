@@ -5,10 +5,7 @@ from sensor_msgs.msg import LaserScan
 
 
 class Lidar:
-    lidarDatas = []
-
-    def setLidarDatas(self, datas):
-        self.lidarDatas = datas
+    result = 0
 
     def callback(self, msg):
         lidarData = []
@@ -17,10 +14,9 @@ class Lidar:
         for i in range(44, 360, 45):
             lidarData.append(msg.ranges[indexStart:i])
             indexStart = i
-        """ for i, data in enumerate(self.lidarData):
+        for i, data in enumerate(self.lidarData):
             if min(data) < 1:
-                print(i) """
-        self.setLidarDatas(lidarData)
+                result = i + 1
 
     def handleLidar(self):
         sub = rospy.Subscriber('scan', LaserScan, self.callback)

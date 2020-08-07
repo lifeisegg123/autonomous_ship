@@ -5,24 +5,22 @@ import rospy
 from std_msgs.msg import Int32
 
 
-class Ship():
-    Lidar = Lidar()
-    pub = rospy.Publisher('motor', Int32, queue_size=10)
+class Ship:
+    lidar = Lidar()
+    motorPub = rospy.Publisher('motor', Int32, queue_size=10)
 
-    def sub(self):
-        self.Lidar.handleLidar()
+    def subscribeLidar(self):
+        self.lidar.handleLidar()
 
-    def talker(self):
-        rate = rospy.Rate(10)  # 10hz
-        hello_str = "hello world %s" % rospy.get_time()
-        rospy.loginfo(hello_str)
+    def publishMotor(self):
+        self.pub.publish()
 
     def init(self):
-        rospy.init_node('talker', anonymous=True)
-        self.sub()
+        rospy.init_node('Ship', anonymous=True)
+        self.subscribeLidar()
         while not rospy.is_shutdown():
-            print(Lidar.lidarDatas)
-            self.pub.publish()
+            # print(self.lidar.lidarDatas)
+            publishMotor()
             rospy.sleep(1)
 
 
