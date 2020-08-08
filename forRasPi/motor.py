@@ -13,7 +13,7 @@ class Motor:
         self.print_board_status()
         self.connectBoard()
 
-        rospy.init_node("motor")
+        rospy.init_node("motorSubscriber")
         self.subMotorValue = rospy.Subscriber(
             "motorValue", motorValue, self.callbackMotorSubscriber)
         rospy.spin()
@@ -22,7 +22,6 @@ class Motor:
         mid = (max - min) / 10
         value = min + (mid * direction)
         pwm = value / (1 / 91 * 0.001)
-
         self.board.set_pwm_duty(id, pwm)
 
     def moveBldc(self, id, direction):
@@ -61,4 +60,3 @@ class Motor:
 
 if __name__ == "__main__":
     m = Motor()
-    m.moveBldc(1, 5)

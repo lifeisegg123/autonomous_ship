@@ -4,7 +4,7 @@ import math
 import time
 import rospy
 from autonomous_ship.msg import imu
-# Power management registers
+
 power_mgmt_1 = 0x6b
 power_mgmt_2 = 0x6c
 
@@ -43,7 +43,7 @@ def get_x_rotation(x, y, z):
 
 
 if __name__ == "__main__":
-    rospy.init_node("imuPublish")
+    rospy.init_node("imuPublisher")
     pub = rospy.Publisher("Imu", imu, queue_size=10)
 
     bus = smbus.SMBus(1)

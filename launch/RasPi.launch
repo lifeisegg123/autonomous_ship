@@ -6,6 +6,7 @@
   </node>
 
   <include file="$(find rplidar_ros)/launch/rplidar.launch" />
-  <node pkg="autonomous_ship" type="imuPublish.py" name="imuPublish"/>
+  <node pkg="autonomous_ship" type="imuPublisher.py" name="imuPublish"/>
+  <node pkg="autonomous_ship" type="gpsPublisher.py" name="gpsPublish"/>
   <node pkg="autonomous_ship" type="motor.py" name="motor"/>
 </launch>
