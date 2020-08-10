@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <node pkg="uvc_camera" type="uvc_camera_node" name="uvc_camera_node">
+    <param name="device" type="string" value="/dev/video0"/>
+  </node>
+
+  <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+  <node pkg="autonomous_ship" type="imuPublisher.py" name="imuPublish"/>
+  <node pkg="autonomous_ship" type="gpsPublisher.py" name="gpsPublish"/>
+  <node pkg="autonomous_ship" type="motor.py" name="motor"/>
+  <node pkg="autonomous_ship" type="lefAndButton.py" name="lefAndButton"/>
+</launch>

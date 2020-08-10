@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: autonomous_ship
+Description: Description of autonomous_ship
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib -lautonomous_ship
+Requires: message_generation roscpp rospy std_msgs
