@@ -9,4 +9,5 @@
   <node pkg="autonomous_ship" type="imuPublisher.py" name="imuPublish"/>
   <node pkg="autonomous_ship" type="gpsPublisher.py" name="gpsPublish"/>
   <node pkg="autonomous_ship" type="motor.py" name="motor"/>
+  <node pkg="autonomous_ship" type="lefAndButton.py" name="lefAndButton"/>
 </launch>
