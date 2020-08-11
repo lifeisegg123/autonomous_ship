@@ -5,6 +5,7 @@ import time
 
 from autonomous_ship.msg import motorValue
 
+
 class Hopping:
     gpsCoordinations = [[100, 10], [500, 300], [600, 100]]
 
@@ -13,13 +14,11 @@ class Hopping:
 
     gps = Gps()
 
-    
-
-    def setMotorValue(self, servoValue, rightValue = 6, leftValue = 6):
+    def setMotorValue(self, servoValue, rightValue=6, leftValue=6):
         self.motorValue.rightMotor = rightValue
         self.motorvalue.leftMotor = leftValue
         self.motorValue.servo = servoValue
-    
+
     def runSubscribers(self):
         self.lidar.handleLidar()
         self.imu.handleImu()
@@ -53,30 +52,29 @@ class Hopping:
         if value <= 0:
             result = True
         return result
-    
-    
+
+
 if __name__ == "__main__":
     try:
         aa = Hopping()
 
-        for x in range(aa.gpsCoordinations.length):
-            
+        for x in range(aa.gpsCoordinations.length):    
             latitude = aa.returnBoolGps(aa.gpsCoordinations[x][0], aa.gps[1])    
             longitude = aa.returnBoolGps(aa.gpsCoordination:s[x][1], aa.gps[2])
             
+
             whlie(True):
                 if latitude and longitude == True:
-                    break;
+                    break
 
                 elif latitude == False:
-                    if latitude <= 0:     
-                        aa.setMotorValue(10, 6, 6) #modify servo value
+                    if latitude <= 0:
+                        aa.setMotorValue(10, 6, 6)  # modify servo value
                     else:
                         aa.setMotorValue(0, 6, 6)
 
                 elif longitude == False:
                     aa.setMotorValue(5, 6, 6)
-                    
 
     except rospy.ROSInterruptExceptio:
         pass
