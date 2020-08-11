@@ -238,6 +238,7 @@ class DFRobot_Epansion_Board_Digital_RGB_LED():
     self._board.set_pwm_duty([self._chan_g], 100 - (g & 0xff) * 100 // 255)
     self._board.set_pwm_duty([self._chan_b], 100 - (b & 0xff) * 100 // 255)
 
+
   def color24(self, color):
     '''
       @brief    Set LED to 24-bits color
