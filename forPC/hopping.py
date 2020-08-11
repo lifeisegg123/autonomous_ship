@@ -3,10 +3,8 @@ from handleGps import Gps
 import rospy
 import time
 
-<<<<<<< HEAD
-=======
 from autonomous_ship.msg import motorValue
->>>>>>> a48d57712f91af7772ee1aa20bc4881c7c18f767
+
 
 class Hopping:
     gpsCoordinations = [[100, 10], [500, 300], [600, 100]]
@@ -16,62 +14,11 @@ class Hopping:
 
     gps = Gps()
 
-<<<<<<< HEAD
-    def motorStraight(self):
-        self.motorValue.rightMotor = 6
-        self.motorvalue.leftMotor = 6
-        time.sleep(1)
-
-    def goToFirstDestination(self):
-        if gpsCoordination[0][0] - 100 <= gps[1] <= gpsCoordination[0][0] + 100 and
-        gpsCoordination[0][1] - 100 <= gps[2] <= gpsCoordination[0][1] + 100:
-            self.motorValue.rightMotor = 6
-            time.sleep(1)
-            while(gpsCoordination[1][0] - 100 <= gps[1] <= gpsCoordination[1][0] + 100 and
-                  gpsCoordination[1][1] - 100 <= gps[2] <= gpsCoordination[1][1] + 100)
-            self.motorStraight()
-            self.goToSecondDestination()
-
-    def goToSecondDestination(self):
-        if gpsCoordination[1][0] - 100 <= gps[1] <= gpsCoordination[1][0] + 100 and
-        gpsCoordination[1][1] - 100 <= gps[2] <= gpsCoordination[1][1] + 100:
-            self.motorValue.leftMotor = 7
-            time.sleep(3)
-
-            while(gpsCoordination[2][0] - 100 <= gps[1] <= gpsCoordination[2][0] + 100 and
-                  gpsCoordination[2][1] - 100 <= gps[2] <= gpsCoordination[2][1] + 100)
-            self.motorStraight()
-            self.goToThirdDestination()
-
-    def goToThirdDestination(self):
-        if gpsCoordination[2][0] - 100 <= gps[1] <= gpsCoordination[2][0] + 100 and
-        gpsCoordination[2][1] - 100 <= gps[2] <= gpsCoordination[2][1] + 100:
-            self.motorValue.rightMotor = 6
-            time.sleep(3)
-
-            while(gpsCoordination[3][0] - 100 <= gps[1] <= gpsCoordination[3][0] + 100 and
-                  gpsCoordination[3][1] - 100 <= gps[2] <= gpsCoordination[3][1] + 100)
-            self.motorStraight()
-            self.goToFourthDestination()
-
-    def goToFourthDestination(self):
-        if gpsCoordination[2][0] - 100 <= gps[1] <= gpsCoordination[2][0] + 100 and
-        gpsCoordination[2][1] - 100 <= gps[2] <= gpsCoordination[2][1] + 100:
-            self.motorValue.leftMotor = 6
-            time.sleep(3)
-
-            while(gpsCoordination[3][0] - 100 <= gps[1] <= gpsCoordination[3][0] + 100 and
-                  gpsCoordination[3][1] - 100 <= gps[2] <= gpsCoordination[3][1] + 100)
-            self.motorStraight()
-=======
-    
->>>>>>> a48d57712f91af7772ee1aa20bc4881c7c18f767
-
-    def setMotorValue(self, servoValue, rightValue = 6, leftValue = 6):
+    def setMotorValue(self, servoValue, rightValue=6, leftValue=6):
         self.motorValue.rightMotor = rightValue
         self.motorvalue.leftMotor = leftValue
         self.motorValue.servo = servoValue
-    
+
     def runSubscribers(self):
         self.lidar.handleLidar()
         self.imu.handleImu()
@@ -97,17 +44,6 @@ class Hopping:
         while not rospy.is_shutdown():
             self.runSubscribers()
             self.publishMotor()
-<<<<<<< HEAD
-            rospy.sleep(1)
-
-
-if __name__ == "__main__":
-    try:
-
-        goToFirstDestination()
-
-    except:
-=======
             rospy.sleep(0.1)
 
     def returnBoolGps(self, gpsCoordinations, gps):
@@ -116,30 +52,29 @@ if __name__ == "__main__":
         if value <= 0:
             result = True
         return result
-    
-    
+
+
 if __name__ == "__main__":
     try:
         aa = Hopping()
 
         for x in range(aa.gpsCoordinations.length):
-            
-            latitude = aa.returnBoolGps(gpsCoordinations[x][0], gps[1])    
-            longitude = aa.returnBoolGps(gpsCoordination:s[x][1], gps[2])
-            
+
+            latitude = aa.returnBoolGps(gpsCoordinations[x][0], gps[1])
+            longitude = aa.returnBoolGps(gpsCoordination: s[x][1], gps[2])
+
             whlie(True):
                 if latitude and longitude == True:
-                    break;
+                    break
 
                 elif latitude == False:
-                    if latitude <= 0:     
-                        aa.setMotorValue(10, 6, 6) #modify servo value
+                    if latitude <= 0:
+                        aa.setMotorValue(10, 6, 6)  # modify servo value
                     else:
                         aa.setMotorValue(0, 6, 6)
 
                 elif longitude == False:
                     aa.setMotorValue(5, 6, 6)
-                    
 
     except rospy.ROSInterruptExceptio:
         pass
@@ -161,4 +96,3 @@ if __name__ == "__main__":
 17890
 76840
 '''
->>>>>>> a48d57712f91af7772ee1aa20bc4881c7c18f767
