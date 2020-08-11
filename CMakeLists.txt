@@ -15,6 +15,7 @@ add_message_files(
   imu.msg
   gps.msg
   motorValue.msg
+  lidar.msg
 )
 generate_messages(
   DEPENDENCIES
