@@ -19,11 +19,11 @@ class Ship:
         self.motorValue.rightMotor = 6
 
         index = 0
-        for i in range(1, len(self.lidar.lidarData)):
+        for i in range(0, len(self.lidar.lidarData)):
             if not math.isinf(self.lidar.lidarData[i]):
                 index = i
                 break
-        for i in range(1, len(self.lidar.lidarData)):
+        for i in range(index, len(self.lidar.lidarData)):
             if self.lidar.lidarData[i] >= self.lidar.lidarData[index] and not math.isinf(self.lidar.lidarData[i]):
                 print i, self.lidar.lidarData[i]
                 index = i
