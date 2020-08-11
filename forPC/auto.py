@@ -33,6 +33,7 @@ class Ship:
             if self.lidar.lidarData[i] >= self.lidar.lidarData[index]:
                 index = i
         servoValue = index / 180 * 10
+        #servoValue = (180 - index) / 180 * 10
         self.motorValue.servo = servoValue
         self.motorPub.publish(motorValue)
 
@@ -41,7 +42,7 @@ class Ship:
         while not rospy.is_shutdown():
             self.runSubscribers()
             print(self.lidar.lidarData)
-            # self.publishMotor()
+            self.publishMotor()
             rospy.sleep(1)
 
 
