@@ -61,8 +61,8 @@ if __name__ == "__main__":
 
         for x in range(aa.gpsCoordinations.length):
             
-            latitude = aa.returnBoolGps(gpsCoordinations[x][0], gps[1])    
-            longitude = aa.returnBoolGps(gpsCoordination:s[x][1], gps[2])
+            latitude = aa.returnBoolGps(aa.gpsCoordinations[x][0], aa.gps[1])    
+            longitude = aa.returnBoolGps(aa.gpsCoordination:s[x][1], aa.gps[2])
             
             whlie(True):
                 if latitude and longitude == True:
