@@ -26,14 +26,19 @@ class Ship:
         print self.lidar.lidarData
         #xCoordDifference = gpsCoordination[0] - self.gps.latitude
         #yCoordDifference = gpsCoordination[1] - self.gps.longitude
+        self.motorValue.leftMotor = 6
         self.motorValue.rightMotor = 6
-        self.motorValue.rightMotor = 4
         index = 0
+        flag = False
         for i in range(self.lidar.lidarData):
-            if self.lidar.lidarData[i] >= self.lidar.lidarData[index]:
-                index = i
-        servoValue = index / 180 * 10
-        #servoValue = (180 - index) / 180 * 10
+            if self.lidar.lidarData[i] != 0 and self.lidar.lidarData[i] <= self.lidar.lidarData[index]:
+                if self.lidar.lidarData[index] - self.lidar.lidarData[i] < 1:
+
+                else:
+                    index = i
+
+        #servoValue = index / 180 * 10
+        servoValue = (180 - index) / 180 * 10
         self.motorValue.servo = servoValue
         self.motorPub.publish(motorValue)
 
