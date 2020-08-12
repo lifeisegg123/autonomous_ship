@@ -32,7 +32,7 @@ class Hopping:
             self.publishMotor()
             rospy.sleep(0.1)
 
-    def returnBoolGpsLatitude(self, gpsCoordinations, gps):
+    def returnGps(self, gpsCoordinations, gps):
         value = gpsCoordinations - gps
         #result = False
         #if value <= 0:
@@ -46,8 +46,8 @@ if __name__ == "__main__":
 
         for x in range(aa.gpsCoordinations.length):
             
-            latitude = aa.returnBoolGps(aa.gpsCoordinations[x][0], aa.gps[1])    
-            longitude = aa.returnBoolGps(aa.gpsCoordination:s[x][1], aa.gps[2])
+            latitude = aa.returnGps(aa.gpsCoordinations[x][0], aa.gps[1])    
+            longitude = aa.returnGps(aa.gpsCoordination:s[x][1], aa.gps[2])
             
             #longitudeBool = longitude = 0 ? True : False
 
