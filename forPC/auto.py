@@ -15,24 +15,34 @@ class Ship:
         self.lidar.handleLidar()
 
     def publishMotor(self):
-        self.motorValue.leftMotor = 6
-        self.motorValue.rightMotor = 6
 
-        index = 0
+        self.motorValue.leftMotor = 5.8
+        self.motorValue.rightMotor = 5.8
+
+        index = None
         for i in range(0, len(self.lidar.lidarData)):
             if not math.isinf(self.lidar.lidarData[i]):
                 index = i
                 break
-        for i in range(index, len(self.lidar.lidarData)):
-            if self.lidar.lidarData[i] >= self.lidar.lidarData[index] and not math.isinf(self.lidar.lidarData[i]):
-                print i, self.lidar.lidarData[i]
-                index = i
-        servoValue = (index) / 360.0 * 10.0
-        self.motorValue.servo = servoValue
-        self.motorPub.publish(self.motorValue)
+        if index != None:
+            for i in range(index, len(self.lidar.lidarData)):
+                if self.lidar.lidarData[i] >= self.lidar.lidarData[index] and not math.isinf(self.lidar.lidarData[i]):
+                    print i, self.lidar.lidarData[i]
+                    index = i
+            servoValue = (360 - index) / 360.0 * 10.0
+            self.motorValue.servo = servoValue
+            self.motorPub.publish(self.motorValue)
 
     def init(self):
         rospy.init_node('Ship', anonymous=True)
+
+        self.motorValue.servo = 5
+        for i in range(50, 58):
+            a = float(i) / 10
+            self.motorValue.leftMotor = a
+            self.motorValue.rightMotor = a
+            self.motorPub.publish(self.motorValue)
+
         while not rospy.is_shutdown():
             self.runSubscribers()
             self.publishMotor()
