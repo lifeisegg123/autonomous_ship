@@ -10,6 +10,7 @@ pi.set_mode(23, pigpio.INPUT)  # control
 pi.set_mode(27, pigpio.INPUT)  # auto
 
 while true:
+    
     if pi.read(23):
         pi.write(8, 0)
         pi.write(17, 1)
