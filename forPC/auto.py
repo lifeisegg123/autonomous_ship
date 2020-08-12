@@ -40,13 +40,6 @@ class Ship:
     def init(self):
         rospy.init_node('Ship', anonymous=True)
 
-        self.motorValue.servo = 5
-        for i in range(50, 58):
-            a = float(i) / 10
-            self.motorValue.leftMotor = a
-            self.motorValue.rightMotor = a
-            self.motorPub.publish(self.motorValue)
-
         while not rospy.is_shutdown():
             self.runSubscribers()
             self.publishMotor()

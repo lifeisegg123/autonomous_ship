@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+  <node pkg="autonomous_ship" type="gpsPublisher.py" name="gpsPublish"/>
+  <node pkg="autonomous_ship" type="motor.py" name="motor"/>
+  <node pkg="autonomous_ship" type="RcMode.py" name="ledAndButton"/>
+  <node pkg="autonomous_ship" type="modifyLidarData.py" name="modifyLidarData"/>
+</launch>

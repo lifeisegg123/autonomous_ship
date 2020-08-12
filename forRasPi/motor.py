@@ -58,8 +58,8 @@ class Motor:
 
     def callbackMotorSubscriber(self, msg):
         self.moveServo(msg.servo)
-        self.moveBldc(1, msg.leftMotor)
-        self.moveBldc(2, msg.rightMotor)
+        #elf.moveBldc(1, msg.leftMotor)
+        #self.moveBldc(2, msg.rightMotor)
 
 
 if __name__ == "__main__":
