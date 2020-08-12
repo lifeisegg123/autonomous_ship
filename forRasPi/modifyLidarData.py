@@ -7,11 +7,11 @@ from sensor_msgs.msg import LaserScan
 
 def callback(msg):
     lidarMsg = lidar()
-    lidarData = list(msg.ranges[270:])
-
-    lidarData.extend(list(msg.ranges[0:90]))
+    lidarData = list(msg.ranges[540:])
+    lidarData.extend(list(msg.ranges[0:180]))
 
     lidarMsg.lidarData = lidarData
+    print len(lidarData)
     pub.publish(lidarMsg)
 
 

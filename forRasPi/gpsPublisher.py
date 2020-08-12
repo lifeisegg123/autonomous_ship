@@ -63,7 +63,7 @@ if __name__ == "__main__":
         data = ser.readline()
         gps_data = GPSparser(data)
 
-        if gps_data:
+        if gps_data != None:
             gpsDataforPub.latitude = gps_data[1]
             gpsDataforPub.longitude = gps_data[2]
             pub.publish()

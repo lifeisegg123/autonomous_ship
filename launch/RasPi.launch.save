@@ -5,5 +5,5 @@
   <node pkg="autonomous_ship" type="gpsPublisher.py" name="gpsPublish"/>
   <node pkg="autonomous_ship" type="motor.py" name="motor"/>
   <node pkg="autonomous_ship" type="ledAndButton.py" name="ledAndButton"/>
-  <node pkg="autonomous_ship" type="modifyLidarData.py" name="modifyLidarData"/>
+  
 </launch>

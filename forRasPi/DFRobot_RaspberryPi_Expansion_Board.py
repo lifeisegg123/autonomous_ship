@@ -280,11 +280,6 @@ class DFRobot_Expansion_Board_Servo():
     '''
     if 0 <= angle <= 180:
       self._board.set_pwm_duty(id, (0.5 + (float(angle) / 90.0)) / 20 * 100)
-  
-  def bldcMove(self, id, direction):
-    
-      self._board.set_pwm_duty(id,
-
 
 import smbus
 

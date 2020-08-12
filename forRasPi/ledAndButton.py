@@ -9,7 +9,8 @@ pi.set_mode(17, pigpio.OUTPUT)  # LEDout
 pi.set_mode(23, pigpio.INPUT)  # control
 pi.set_mode(27, pigpio.INPUT)  # auto
 
-while true:
+while True:
+    """
     if pi.read(23):
         pi.write(8, 0)
         pi.write(17, 1)
@@ -18,3 +19,8 @@ while true:
         pi.write(17, 1)
         time.sleep(0.5)
         pi.write(17, 0)
+	time.sleep(0.5)
+    else:
+	pi.write(17,0)
+    """
+    pi.write(8, 1)

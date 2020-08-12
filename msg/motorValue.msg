@@ -1,3 +1,3 @@
-uint16 servo
-uint16 leftMotor
-uint16 rightMotor
+float32 servo
+float32 leftMotor
+float32 rightMotor
