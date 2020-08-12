@@ -15,14 +15,10 @@ class Hopping:
 
     
 
-    def setMotorValue(self, servoValue, rightValue = 6, leftValue = 6):
-        self.motorValue.rightMotor = rightValue
-        self.motorvalue.leftMotor = leftValue
+    def setServoMotorValue(self, servoValue):
         self.motorValue.servo = servoValue
     
     def runSubscribers(self):
-        self.lidar.handleLidar()
-        self.imu.handleImu()
         self.gps.handleGps()
 
     def init(self):
@@ -30,60 +26,45 @@ class Hopping:
         while not rospy.is_shutdown():
             self.runSubscribers()
             self.publishMotor()
+            self.gpsServo()
             rospy.sleep(0.1)
 
     def returnGps(self, gpsCoordinations, gps):
         value = gpsCoordinations - gps
-        #result = False
-        #if value <= 0:
-        #    result = True
         return result
-    
-    
-if __name__ == "__main__":
-    try:
-        aa = Hopping()
 
-        for x in range(aa.gpsCoordinations.length):
-            
-            latitude = aa.returnGps(aa.gpsCoordinations[x][0], aa.gps[1])    
-            longitude = aa.returnGps(aa.gpsCoordination:s[x][1], aa.gps[2])
-            
-            #longitudeBool = longitude = 0 ? True : False
+    def publishMotor(self):
 
-            whlie(True):
+        self.motorValue.servo = servoValue
+        self.motorPub.publish(self.motorValue)
+
+    def gpsServo(self):
+
+        for x in range(self.gpsCoordinations.length):
+            latitude = self.returnGps(self.gpsCoordinations[x][0], self.gps[1])    
+            longitude = self.returnGps(self.gpsCoordination:s[x][1], self.gps[2])
+            
+            # longitude = 0 ? True : False
+            
+            while(True):
                 if latitude <= 0 and longitude <= 0:
                     break;
 
                 elif latitude != 0 and longitude <= 0:
                     if latitude  > 0:
-                        aa.setMotorValue(0, 6, 6)
+                        self.setServoMotorValue(0)
+
                     elif latitude < 0:
-                        aa.setMotorValue(10, 6, 6)
+                        self.setServoMotorValue(10)
 
                 elif longitude != 0 and latitude <= 0:
-                        aa.setMotorValue(5, 6, 6)
+                        self.setServoMotorValue(5)
+                
 
-                    
-                    
+if __name__ == "__main__":
+    try:
+        aa = Hopping()
+        aa.init()
 
     except rospy.ROSInterruptExceptio:
         pass
-
-
-'''
-15750
-73270
-
-17300
-72240
-
-16
-
-
-
-
-
-17890
-76840
-'''
