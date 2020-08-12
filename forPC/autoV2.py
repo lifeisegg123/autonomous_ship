@@ -30,8 +30,10 @@ class Ship:
                     index = i
             if index < 150:
                 servoValue = 10
+                self.motorValue.rightMotor = 5.5
             elif index > 210:
                 servoValue = 0
+                self.motorValue.leftMotor = 5.5
             else:
                 servoValue = (360 - index) / 360.0 * 10.0
             self.motorValue.servo = servoValue

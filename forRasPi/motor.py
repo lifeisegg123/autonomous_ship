@@ -12,14 +12,13 @@ class Motor:
         self.board = Board(1, 0x10)
         self.print_board_status()
         self.connectBoard()
-	self.board.set_pwm_enable()
+        self.board.set_pwm_enable()
         self.board.set_pwm_frequency(91)
 
         rospy.init_node("motorSubscriber")
 
         self.subMotorValue = rospy.Subscriber(
             "motor", motorValue, self.callbackMotorSubscriber)
-	#self.subMotorValue = rospy.Subscriber("motor", motorValue, self.callbackMotorRun)
 
         rospy.spin()
 
@@ -56,8 +55,12 @@ class Motor:
 
         self.print_board_status()
         return 1
+
     def callbackMotorSubscriber(self, msg):
-	self.moveServo(msg.servo)
+        self.moveServo(msg.servo)
+        self.moveBldc(1, msg.leftMotor)
+        self.moveBldc(2, msg.rightMotor)
+
 
 if __name__ == "__main__":
     m = Motor()
