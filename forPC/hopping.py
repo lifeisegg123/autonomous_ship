@@ -13,11 +13,9 @@ class Hopping:
 
     gps = Gps()
 
-    
-
     def setServoMotorValue(self, servoValue):
         self.motorValue.servo = servoValue
-    
+
     def runSubscribers(self):
         self.gps.handleGps()
 
@@ -25,7 +23,6 @@ class Hopping:
         rospy.init_node('Ship', anonymous=True)
         while not rospy.is_shutdown():
             self.runSubscribers()
-            self.publishMotor()
             self.gpsServo()
             rospy.sleep(0.1)
 
@@ -34,8 +31,6 @@ class Hopping:
         return result
 
     def publishMotor(self):
-
-        self.motorValue.servo = servoValue
         self.motorPub.publish(self.motorValue)
 
     def gpsServo(self):
@@ -53,13 +48,13 @@ class Hopping:
                 elif latitude != 0 and longitude <= 0:
                     if latitude  > 0:
                         self.setServoMotorValue(0)
-
+                        self.publishMotor()
                     elif latitude < 0:
                         self.setServoMotorValue(10)
-
+                        self.publishMotor()
                 elif longitude != 0 and latitude <= 0:
                         self.setServoMotorValue(5)
-                
+                        self.publishMotor()
 
 if __name__ == "__main__":
     try:
