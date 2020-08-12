@@ -32,7 +32,7 @@ class Motor:
         self.moveMotor(id, 1.1, 1.9, direction)
 
     def moveServo(self, direction):
-        self.moveMotor(0, 8.0, 2.2, direction)
+        self.moveMotor(0, 9.0, 2.1, direction)
 
     def print_board_status(self):
         if self.board.last_operate_status == self.board.STA_OK:
