@@ -2,13 +2,14 @@
 from handleLidar import Lidar
 import rospy
 import math
+import time
 from autonomous_ship.msg import motorValue
 
 
 class Ship:
     motorPub = rospy.Publisher('motor', motorValue, queue_size=10)
     motorValue = motorValue()
-
+    counter = 0
     lidar = Lidar()
 
     def runSubscribers(self):
@@ -17,25 +18,33 @@ class Ship:
     def publishMotor(self):
         self.motorValue.leftMotor = 5.8
         self.motorValue.rightMotor = 5.8
-
-        index = None
-        for i in range(0, len(self.lidar.lidarData)):
-            if not math.isinf(self.lidar.lidarData[i]):
-                index = i
-                break
-        if index != None:
-            for i in range(index, len(self.lidar.lidarData)):
-                if self.lidar.lidarData[i] >= self.lidar.lidarData[index] and not math.isinf(self.lidar.lidarData[i]):
-                    print i, self.lidar.lidarData[i]
+        if self.counter == 0:
+            self.motorValue.servo = 5
+            for i in range(0, 60):
+                self.motorPub.publish(self.motorValue)
+                time.sleep(0.1)
+        else:
+            index = None
+            for i in range(0, len(self.lidar.lidarData)):
+                if not math.isinf(self.lidar.lidarData[i]):
                     index = i
-            if index < 150:
-                servoValue = 10
-            elif index > 210:
-                servoValue = 0
+                    break
+            if index != None:
+                for i in range(index, len(self.lidar.lidarData)):
+                    if self.lidar.lidarData[i] >= self.lidar.lidarData[index] and not math.isinf(self.lidar.lidarData[i]):
+                        print i, self.lidar.lidarData[i]
+                        index = i
+                if index < 150:
+                    servoValue = 10
+                elif index > 210:
+                    servoValue = 0
+                else:
+                    servoValue = (360 - index) / 360.0 * 10.0
+                self.motorValue.servo = servoValue
+                self.motorPub.publish(self.motorValue)
             else:
-                servoValue = (360 - index) / 360.0 * 10.0
-            self.motorValue.servo = servoValue
-            self.motorPub.publish(self.motorValue)
+                print "Not Detected"
+        self.counter += 1
 
     def init(self):
         rospy.init_node('Ship', anonymous=True)
