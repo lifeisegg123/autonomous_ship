@@ -24,35 +24,48 @@ class Gara:
         self.motorPub.publish(self.motorValue)
 
     def moveServo(self):
-        for x in range(0, 1):    
-            self.setServoMotorValue(5)
-            self.publishMotor()
-            rospy.sleep(2)
+
+        co = 0
+        self.setServoMotorValue(5)
+        self.publishMotor()
+        rospy.sleep(5)
+
+        while True: 
+
 
             self.setServoMotorValue(0)
             self.publishMotor()
-            rospy.sleep(8)
+            rospy.sleep(5)
 
             self.setServoMotorValue(10)
             self.publishMotor()
-            rospy.sleep(8)
+            rospy.sleep(2)
 
-            self.setServoMotorValue(5) #reach to end
+            self.setServoMotorValue(5) 
             self.publishMotor()
-            rospy.sleep(1)
+            rospy.sleep(11)
 
             self.setServoMotorValue(10)
             self.publishMotor()
-            rospy.sleep(7)
+            rospy.sleep(5)
             
-            self.setServoMotorValue(5)
+            self.setServoMotorValue(0)
             self.publishMotor()
-            rospy.sleep(3)
+            rospy.sleep(2)
             
             self.setServoMotorValue(10) #reach to start point
             self.publishMotor()
-            rospy.sleep(7)
+            rospy.sleep(6)
 
+            if co == 2:
+                self.setServoMotorValue(0)
+                self.publishMotor()
+                rospy.sleep(5)
+
+                self.setServoMotorValue(5)
+                self.publishMotor()
+                rospy.sleep(5)
+                break;
     def init(self):
         rospy.init_node('Ship', anonymous=True)
         while not rospy.is_shutdown():
