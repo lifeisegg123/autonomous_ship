@@ -33,13 +33,14 @@ class Gara:
 
         while True:
 
-            self.setServoMotorValue(0)
-            self.publishMotor()
-            rospy.sleep(5)
+            if co == 0:
+                self.setServoMotorValue(0)
+                self.publishMotor()
+                rospy.sleep(5)
 
-            self.setServoMotorValue(10)
-            self.publishMotor()
-            rospy.sleep(2)
+                self.setServoMotorValue(10)
+                self.publishMotor()
+                rospy.sleep(2)
 
             self.setServoMotorValue(5)
             self.publishMotor()
@@ -53,19 +54,23 @@ class Gara:
             self.publishMotor()
             rospy.sleep(2)
 
+            self.setServoMotorValue(5)
+            self.publishMotor()
+            rospy.sleep(11)
+
             self.setServoMotorValue(10)  # reach to start point
             self.publishMotor()
             rospy.sleep(6)
 
-            if co == 2:
+            co += 1
+            if co >= 2:
+
                 self.setServoMotorValue(0)
                 self.publishMotor()
                 rospy.sleep(5)
-
-                self.setServoMotorValue(5)
-                self.publishMotor()
-                rospy.sleep(5)
-                break
+                while True:
+                    self.setServoMotorValue(5)
+                    self.publishMotor()
 
     def init(self):
         rospy.init_node('Ship', anonymous=True)
